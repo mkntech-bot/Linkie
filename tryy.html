@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Dynamic Link</title>
+  <style>
+    body {
+      background-color: #0d111c;
+      color: white;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background-color: #161b22;
+      border: 2px solid #30363d;
+      padding: 30px;
+      border-radius: 12px;
+      width: 350px;
+      box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px;
+      background-color: #0d111c;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      color: white;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #00d2ff;
+      border: none;
+      border-radius: 6px;
+      color: #0d111c;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      box-shadow: 0 0 10px rgba(0, 210, 255, 0.8);
+    }
+
+    #link-list {
+      margin-top: 20px;
+      padding: 0;
+      list-style-type: none;
+    }
+
+    #link-list li {
+      background-color: #21262d;
+      margin-bottom: 8px;
+      padding: 10px;
+      border-radius: 6px;
+      border-left: 4px solid #00d2ff;
+    }
+
+    #link-list a {
+      color: #00d2ff;
+      text-decoration: none;
+    }
+
+    #link-list a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h3>Add a New Link</h3>
+    <input type="text" id="link-name" placeholder="Link Title (e.g., Google)">
+    <input type="url" id="link-url" placeholder="URL (e.g., https://google.com)">
+    <button id="add-btn">Add Link</button>
+
+    <ul id="link-list">
+      <!-- Newly added links will appear here -->
+    </ul>
+  </div>
+
+  <script>
+    // Grab elements from the HTML
+    const addBtn = document.getElementById('add-btn');
+    const nameInput = document.getElementById('link-name');
+    const urlInput = document.getElementById('link-url');
+    const linkList = document.getElementById('link-list');
+
+    // Listen for a click on the "Add Link" button
+    addBtn.addEventListener('click', function() {
+      const name = nameInput.value.trim();
+      const url = urlInput.value.trim();
+
+      // Make sure inputs aren't empty
+      if (name === "" || url === "") {
+        alert("Please fill in both fields!");
+        return;
+      }
+
+      // Create a new list item (li) and anchor tag (a)
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+
+      a.href = url;
+      a.textContent = name;
+      a.target = "_blank"; // Opens link in a new tab
+
+      // Put the anchor inside the list item, and the list item inside the UL list
+      li.appendChild(a);
+      linkList.appendChild(li);
+
+      // Clear the input fields for the next entry
+      nameInput.value = "";
+      urlInput.value = "";
+    });
+  </script>
+
+</body>
+</html>
